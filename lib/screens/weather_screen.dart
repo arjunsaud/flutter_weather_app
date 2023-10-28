@@ -50,12 +50,26 @@ class WeatherScreen extends StatelessWidget {
               scrollDirection: Axis.horizontal,
               child: Row(
                 children: const [
-                  SmallCard(),
-                  SmallCard(),
-                  SmallCard(),
-                  SmallCard(),
-                  SmallCard(),
-                  SmallCard()
+                  SmallCard(
+                    icon: Icons.sunny,
+                    time: "00:00",
+                    temperature: "26",
+                  ),
+                  SmallCard(
+                    icon: Icons.sunny,
+                    time: "03:00",
+                    temperature: "32",
+                  ),
+                  SmallCard(
+                    icon: Icons.sunny,
+                    time: "06:00",
+                    temperature: "24",
+                  ),
+                  SmallCard(
+                    icon: Icons.sunny,
+                    time: "09:00",
+                    temperature: "20",
+                  ),
                 ],
               ),
             ),
@@ -68,12 +82,27 @@ class WeatherScreen extends StatelessWidget {
                 fontSize: 16,
               ),
             ),
+            const SizedBox(
+              height: 10,
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: const [
-                AdditionalCard(),
-                AdditionalCard(),
-                AdditionalCard()
+                AdditionalCard(
+                  icon: Icons.water_drop,
+                  label: "Humidity",
+                  value: "91",
+                ),
+                AdditionalCard(
+                  icon: Icons.air,
+                  label: "Wind Speed",
+                  value: "91",
+                ),
+                AdditionalCard(
+                  icon: Icons.beach_access,
+                  label: "Pressure",
+                  value: "91",
+                ),
               ],
             ),
           ],

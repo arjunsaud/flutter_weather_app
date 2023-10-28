@@ -1,7 +1,15 @@
 import 'package:flutter/material.dart';
 
 class SmallCard extends StatelessWidget {
-  const SmallCard({super.key});
+  final IconData icon;
+  final String time;
+  final String temperature;
+
+  const SmallCard(
+      {super.key,
+      required this.icon,
+      required this.time,
+      required this.temperature});
 
   @override
   Widget build(BuildContext context) {
@@ -12,22 +20,22 @@ class SmallCard extends StatelessWidget {
         decoration: BoxDecoration(borderRadius: BorderRadius.circular(10)),
         padding: const EdgeInsets.all(10.0),
         child: Column(
-          children: const [
+          children: [
             Text(
-              "00:00",
-              style: TextStyle(fontWeight: FontWeight.bold),
+              time,
+              style: const TextStyle(fontWeight: FontWeight.bold),
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             Icon(
-              Icons.cloud,
+              icon,
               size: 32,
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
-            Text("120.11")
+            Text(temperature)
           ],
         ),
       ),
@@ -36,33 +44,36 @@ class SmallCard extends StatelessWidget {
 }
 
 class AdditionalCard extends StatelessWidget {
-  const AdditionalCard({super.key});
+  final IconData icon;
+  final String label;
+  final String value;
+
+  const AdditionalCard(
+      {super.key,
+      required this.icon,
+      required this.label,
+      required this.value});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: 100,
-      decoration: BoxDecoration(borderRadius: BorderRadius.circular(10)),
-      padding: const EdgeInsets.all(10.0),
-      child: Column(
-        children: const [
-          Icon(
-            Icons.water_drop,
-            size: 32,
-          ),
-          SizedBox(
-            height: 10,
-          ),
-          Text(
-            "Text",
-            style: TextStyle(fontWeight: FontWeight.bold),
-          ),
-          SizedBox(
-            height: 10,
-          ),
-          Text("120.11")
-        ],
-      ),
+    return Column(
+      children: [
+        Icon(
+          icon,
+          size: 32,
+        ),
+        const SizedBox(
+          height: 10,
+        ),
+        Text(
+          label,
+          style: const TextStyle(fontWeight: FontWeight.w500, fontSize: 12),
+        ),
+        const SizedBox(
+          height: 10,
+        ),
+        Text(value)
+      ],
     );
   }
 }
