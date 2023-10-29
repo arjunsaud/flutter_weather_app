@@ -2,7 +2,10 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 
 class BigCard extends StatelessWidget {
-  const BigCard({super.key});
+  final temp;
+  final weather;
+
+  const BigCard({super.key, required this.temp, required this.weather});
 
   @override
   Widget build(BuildContext context) {
@@ -22,24 +25,25 @@ class BigCard extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.all(10.0),
               child: Column(
-                children: const [
+                children: [
                   Text(
-                    "300 ° F",
-                    style: TextStyle(fontSize: 32, letterSpacing: 1),
+                    "$temp K",
+                    style: const TextStyle(fontSize: 32, letterSpacing: 1),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 15,
                   ),
-                  Icon(
+                  const Icon(
                     Icons.cloud,
+                    color: Colors.blue,
                     size: 32,
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 15,
                   ),
                   Text(
-                    "Rain",
-                    style: TextStyle(fontSize: 20),
+                    "$weather",
+                    style: const TextStyle(fontSize: 20),
                   )
                 ],
               ),

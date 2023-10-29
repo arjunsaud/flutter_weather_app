@@ -19,7 +19,7 @@ class WeatherApp extends StatelessWidget {
           useMaterial3: true,
           fontFamily: GoogleFonts.poppins().fontFamily),
       title: "Weather App",
-      home: WeatherScreen(),
+      home: const WeatherScreen(),
     );
   }
 }
