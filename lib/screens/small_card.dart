@@ -23,7 +23,9 @@ class SmallCard extends StatelessWidget {
           children: [
             Text(
               time,
-              style: const TextStyle(fontWeight: FontWeight.bold),
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style: const TextStyle(fontWeight: FontWeight.w500),
             ),
             const SizedBox(
               height: 10,
@@ -75,7 +77,10 @@ class AdditionalCard extends StatelessWidget {
         const SizedBox(
           height: 10,
         ),
-        Text(value)
+        Text(
+          value,
+          style: const TextStyle(fontSize: 13),
+        )
       ],
     );
   }

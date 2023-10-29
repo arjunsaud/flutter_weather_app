@@ -6,6 +6,7 @@ import 'package:flutter_weather_app/secrets.dart';
 import 'big_card.dart';
 import 'small_card.dart';
 import 'package:http/http.dart' as http;
+import 'package:intl/intl.dart';
 
 class WeatherScreen extends StatefulWidget {
   const WeatherScreen({super.key});
@@ -116,7 +117,26 @@ class _WeatherScreenState extends State<WeatherScreen> {
                 //     ],
                 //   ),
                 // ),
-                ListView.builder(itemBuilder: (context, index) {}),
+                SizedBox(
+                  height: 120,
+                  //list view have tendency to take full height so wrapping it with sized box
+                  child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: 9,
+                    itemBuilder: (context, index) {
+                      final time =
+                          DateTime.parse(data?['list'][index + 1]['dt_txt']);
+                      return SmallCard(
+                        icon: Icons.device_thermostat,
+                        time: DateFormat.Hm().format(time),
+                        temperature:
+                            (data?['list'][index + 1]['main']['temp'] - 273.15)
+                                .toStringAsFixed(2)
+                                .toString(),
+                      );
+                    },
+                  ),
+                ),
                 const SizedBox(
                   height: 20,
                 ),
