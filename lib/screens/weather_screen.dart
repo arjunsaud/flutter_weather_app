@@ -20,10 +20,10 @@ class _WeatherScreenState extends State<WeatherScreen> {
     try {
       final resp = await http.get(
         Uri.parse(
-            'https://api.openweathermap.org/data/2.5/weather?q=$city&APPID=$apiKey'),
+            'https://api.openweathermap.org/data/2.5/forecast?q=$city&APPID=$apiKey'),
       );
       final data = jsonDecode(resp.body);
-      if (data['cod'] != 200) {
+      if (data['cod'] != '200') {
         throw 'An Error Occurred Fetching Data';
       }
 
@@ -63,8 +63,13 @@ class _WeatherScreenState extends State<WeatherScreen> {
           }
 
           final data = snapshot.data;
-          final currentTemp = data?['main']['temp'];
-          final currentWeather = data?['weather'][0]['main'];
+          final currentTemp =
+              (data?['list'][0]['main']['temp'] - 273.15).toStringAsFixed(2);
+          final currentWeather = data?['list'][0]['weather'][0]['main'];
+
+          final pressure = data?['list'][0]['main']['pressure'];
+          final humidity = data?['list'][0]['main']['humidity'];
+          final speed = data?['list'][0]['wind']['speed'];
 
           return Padding(
             padding: const EdgeInsets.all(15),
@@ -74,7 +79,13 @@ class _WeatherScreenState extends State<WeatherScreen> {
                 const SizedBox(
                   height: 40,
                 ),
-                BigCard(temp: currentTemp, weather: currentWeather),
+                BigCard(
+                  temp: currentTemp,
+                  weather: currentWeather,
+                  icon: currentWeather == 'Clouds' || currentWeather == "Rain"
+                      ? Icons.cloud
+                      : Icons.sunny,
+                ),
                 const SizedBox(
                   height: 20,
                 ),
@@ -87,33 +98,25 @@ class _WeatherScreenState extends State<WeatherScreen> {
                 const SizedBox(
                   height: 10,
                 ),
-                SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: Row(
-                    children: const [
-                      SmallCard(
-                        icon: Icons.sunny,
-                        time: "00:00",
-                        temperature: "26",
-                      ),
-                      SmallCard(
-                        icon: Icons.sunny,
-                        time: "03:00",
-                        temperature: "32",
-                      ),
-                      SmallCard(
-                        icon: Icons.sunny,
-                        time: "06:00",
-                        temperature: "24",
-                      ),
-                      SmallCard(
-                        icon: Icons.sunny,
-                        time: "09:00",
-                        temperature: "20",
-                      ),
-                    ],
-                  ),
-                ),
+                //this make add 8 card even all cards are not shown
+                // SingleChildScrollView(
+                //   scrollDirection: Axis.horizontal,
+                //   child: Row(
+                //     children: [
+                //we don't need bracket in for loop, if there are more cards like SmallCard we can just type for (int i = 1; i <= 8; i++) ...[ array of widgets] // this destructure all widgets
+                //       for (int i = 1; i <= 8; i++)
+                //         SmallCard(
+                //           icon: Icons.device_thermostat,
+                //           time: (data?['list'][i]['dt']).toString(),
+                //           temperature:
+                //               (data?['list'][i]['main']['temp'] - 273.15)
+                //                   .toStringAsFixed(2)
+                //                   .toString(),
+                //         ),
+                //     ],
+                //   ),
+                // ),
+                ListView.builder(itemBuilder: (context, index) {}),
                 const SizedBox(
                   height: 20,
                 ),
@@ -128,21 +131,21 @@ class _WeatherScreenState extends State<WeatherScreen> {
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: const [
+                  children: [
                     AdditionalCard(
                       icon: Icons.water_drop,
                       label: "Humidity",
-                      value: "91",
+                      value: '$humidity',
                     ),
                     AdditionalCard(
                       icon: Icons.air,
                       label: "Wind Speed",
-                      value: "91",
+                      value: '$speed',
                     ),
                     AdditionalCard(
                       icon: Icons.beach_access,
                       label: "Pressure",
-                      value: "91",
+                      value: '$pressure',
                     ),
                   ],
                 ),

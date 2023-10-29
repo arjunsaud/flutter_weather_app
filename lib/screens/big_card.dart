@@ -4,8 +4,13 @@ import 'package:flutter/material.dart';
 class BigCard extends StatelessWidget {
   final temp;
   final weather;
+  final icon;
 
-  const BigCard({super.key, required this.temp, required this.weather});
+  const BigCard(
+      {super.key,
+      required this.temp,
+      required this.weather,
+      required this.icon});
 
   @override
   Widget build(BuildContext context) {
@@ -27,15 +32,14 @@ class BigCard extends StatelessWidget {
               child: Column(
                 children: [
                   Text(
-                    "$temp K",
+                    "$temp °C",
                     style: const TextStyle(fontSize: 32, letterSpacing: 1),
                   ),
                   const SizedBox(
                     height: 15,
                   ),
-                  const Icon(
-                    Icons.cloud,
-                    color: Colors.blue,
+                  Icon(
+                    icon,
                     size: 32,
                   ),
                   const SizedBox(

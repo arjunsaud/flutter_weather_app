@@ -35,7 +35,10 @@ class SmallCard extends StatelessWidget {
             const SizedBox(
               height: 10,
             ),
-            Text(temperature)
+            Text(
+              '$temperature °C',
+              style: const TextStyle(fontSize: 12),
+            )
           ],
         ),
       ),
